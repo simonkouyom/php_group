@@ -19,7 +19,8 @@
     <div class="container">
         <h1>Bienvenue Simon</h1>
         <div class="gestion">
-            <a href="">Faire une commande</a>
+            <a href="./marcher.php">Boutique</a>
+            <a href="./commande.php">Faire une commande</a>
             <a href="">Déconnexion</a>
         </div>
         <div class="cmd">

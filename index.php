@@ -11,8 +11,9 @@
             logo
         </div>
         <nav>
+            <a href="./pages/marcher.php">Boutique</a>
             <a href="./pages/commande.php">Commander</a>
-            <a href="">Se connecter</a>
+            <a href="./pages/connexion.php?id=0">Se connecter</a>
         </nav>
     </header>
     <div class="containe">
