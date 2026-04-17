@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+aside{
+    display: flex;
+    position: absolute;
+}
+aside ul{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: aqua;
+    justify-content: space-between;
+   padding: 40px 20px 70px 20px;
+}
+
+.li{
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid;
+    list-style: none;
+}
+
+.active{
+    background-color: blue;
+    color: white;
+}
+.container{
+    padding: 20px;
+    margin-left: 230px;
+}
+
+.main{
+    display: none;
+}
+
+.info_important .div0, .info_important .div1{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20vh;
+}
+.info_important .card{
+    height: 20vh;
+    width: 50vh;
+    border: 1px solid;
+}
+
+.card p{
+    font-size: 25px;
+    font-weight: bold;
+    opacity: 0.8;
+    text-align: center;
+}
+
+.card .number{
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.head_produit button{
+    border-radius: 12px;
+    border: 1px solid;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.btn-active{
+    background-color: aquamarine;
+    color: blue;
+}
+
+.form_produit{
+    display: none;
+}
+
+table{
+    border-collapse: collapse;
+    border: 2px solid;
+    width: 100%;
+}
+
+tr{
+    border: 1px solid;
+}
+
+td, th{
+    border: 1px solid;
+}

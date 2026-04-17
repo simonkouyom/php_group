@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -9,10 +9,11 @@
 
 <body>
     <div class="container">
-        <form action="">
+        <form id="admin">
+            <h1>Authentification</h1> 
             <div class="form-control">
-                <label for="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" placeholder="Votre pseudo">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Votre Email">
             </div>
             <div class="form-control">
                 <label for="mdp">Mot de passe</label>
@@ -21,6 +22,8 @@
             <button type="submit">Se connecter</button>
         </form>
     </div>
+
+    <script src="./script/connexion.js"></script>
 </body>
 
 </html>

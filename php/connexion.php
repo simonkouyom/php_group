@@ -1,38 +1,106 @@
 <?php
-require '../.env/PHPMailer/PHPMailerAutoload.php';
 
-$mail = new PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 
-//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+include("../config/db.php");
+require_once("../sendMail.php");
+header("Content-Type: application/json");
+if (isset($_POST['test'])) {
+    $id = $_POST["test"];
+    if ($id == 0) {
+        $pseudo = htmlspecialchars($_POST["pseudo"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $mdp = htmlspecialchars($_POST["mdp"]);
+        if (!empty($pseudo) && !empty($email) && !empty($mdp)) {
+            $req_user = $conn->prepare("SELECT * FROM users WHERE Email=?");
+            $req_user->execute([$email]);
 
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'user@example.com';                 // SMTP username
-$mail->Password = 'secret';                           // SMTP password
-$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587;                                    // TCP port to connect to
+            if ($req_user->rowCount() > 0) {
+                echo json_encode([
+                    "status" => "faild",
+                    "mes" => "Vous avez déjà un compte "
+                ]);
+            } else {
+                $code = rand(100000, 999999);
+                $content = "
+                <p>Bonjour $pseudo</p>
+                <p>Votre code de confirmation est :</p>
+                <h1>$code </h1>
+                ";
+                $mdphash = password_hash($mdp, PASSWORD_DEFAULT);
+                $insert_user = $conn->prepare("INSERT INTO users(Pseudo, Email, Code, Confirmer, Etat, Mdp) VALUES(?,?,?,?,?, ?)");
+                if ($insert_user->execute([$pseudo, $email, $code, 0, "En attente", $mdphash])) {
+                    //envoie du email
+                    $mail = new PHPMailer();
+                    if(envoiemail($mail, $email, $content, $pseudo)) {
+                        echo json_encode([
+                            "status" => "non",
+                            "mes" => "compte créer avec succès "
+                        ]);
+                    }else{
+                        echo json_encode([
+                        "status" => "non",
+                        "mes" => "message non envoyer "
+                    ]);
+                    }
+                } else {
+                    echo json_encode([
+                        "status" => "faild",
+                        "mes" => "Un problème est survenue lors de l'inscription "
+                    ]);
+                }
+            }
+        } else {
+            echo json_encode([
+                "status" => "faild",
+                "mes" => "Les champs sont vide"
+            ]);
+        }
+    } else {
+        $email = htmlspecialchars($_POST["email"]);
+        $mdp = htmlspecialchars($_POST["mdp"]);
+        if (!empty($email) && !empty($mdp)) {
+            $req_user = $conn->prepare("SELECT * FROM users WHERE Email=?");
+            $req_user->execute([$email]);
 
-$mail->setFrom('from@example.com', 'Mailer');
-$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-$mail->addAddress('ellen@example.com');               // Name is optional
-$mail->addReplyTo('info@example.com', 'Information');
-$mail->addCC('cc@example.com');
-$mail->addBCC('bcc@example.com');
-
-$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-$mail->isHTML(true);                                  // Set email format to HTML
-
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
+            if ($req_user->rowCount() == 1) {
+                $user = $req_user->fetch();
+                $mdpreq = $user["Mdp"];
+                $confirmer = $user["Confirmer"];
+                if (password_verify($mdp, $mdpreq)) {
+                    if ($confirmer == 1) {
+                        echo json_encode([
+                            "status" => "success",
+                            "mes" => ""
+                        ]);
+                    } else {
+                        echo json_encode([
+                            "status" => "non",
+                            "mes" => ""
+                        ]);
+                    }
+                } else {
+                    echo json_encode([
+                        "status" => "faild",
+                        "mes" => "Mot de passe incorrect"
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    "status" => "faild",
+                    "mes" => "Compte n'existe pas"
+                ]);
+            }
+        } else {
+            echo json_encode([
+                "status" => "faild",
+                "mes" => "Les champs sont vides"
+            ]);
+        }
+    }
 } else {
-    echo 'Message has been sent';
+    echo json_encode([
+        "status" => "faild",
+        "mes" => "error"
+    ]);
 }
-
-?>

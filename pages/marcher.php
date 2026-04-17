@@ -14,6 +14,7 @@
             <a href="">Marcher</a>
             <a href="../index.php">Accueil</a>
             <a href="./connexion.php">Se connecter</a>
+            <p id="panier">1</p>
         </nav>
     </header>
     <div class="container">
@@ -29,9 +30,14 @@
                 <p class="nom">Nom</p>
                 <p class="prix">Prix</p>
                 <p class="promo">Prix promo</p>
-                <p class="cmd"><button type="button" class="btn-cmd">Commander</button></p>
+                <p class="cmd">
+                    <button type="button" class="btn-cmd">Commander</button>
+                    <button type="button" class="apanier" value="<?= 1 ?>">Ajouter au panier</button>
+                </p>
             </div>
         </div>
     </div>
+
+    <script src="../script/marcher.js"></script>
 </body>
 </html>
