@@ -5,126 +5,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
+    <link rel="stylesheet" href="../css/admin-gestion.css">
 </head>
 
-<body>
-    <header>
-        <div class="logo">
-            logo
-        </div>
-        <nav>
-            <a href="">Profil</a>
-            <a href="">Admin</a>
-        </nav>
-    </header>
-    <aside>
-        <ul>
-            <li>globale</li>
-            <li>Produits</li>
-            <li>Ajouter </li>
-            <li>Gerer</li>
-            <li>Deconnexion</li>
-        </ul>
-    </aside>
-    <div class="container">
-        <h1>Tableau de bord Admin</h1>
-        <main class="globale">
-            <h1>Vue Globale</h1>
-            <div class="card">
-                commandes en attente
-            </div>
-            <div class="card">
-                alerte de stock
-            </div>
-            <div class="card">
-                commande valider
-            </div>
-            <div class="card">
-                Vente du moi
-            </div>
-        </main>
-        <main class="produit">
-            <div class="head_produit">
-                <button class="list">Liste des produit</button>
-                <button class="aprovisionnement">Approvisionnement</button>
-            </div>
-            <div class="list">
-                <table>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Type</th>
-                        <th>Pu</th>
-                        <th>Qte</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <td>Biscuit</td>
-                        <td>aliment</td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>
-                            <button type="button" class="modifier">Modifier</button>
-                            <button type="button" class="supprimer">Supprimer</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="form">
-                <form action="">
-                    <h1>Valider l'approvisionnement</h1>
-                    <div class="form-control">
-                        <label for="produit">Produit</label>
-                        <select name="produit" id="produit">
-                            <option value="">Choisissez une produit</option>
+<body class="admin-dashboard">
+    <div class="page-shell">
+        <header>
+            <div class="logo"><img src="../Image/logo.jpeg" alt="Admin logo"></div>
+            <nav>
+                <a href="#overview">Vue globale</a>
+                <a href="#produits">Produits</a>
+                <a href="#ajouter">Ajouter</a>
+            </nav>
+        </header>
 
-                        </select>
-                    </div>
-                    <div class="from-control">
-                        <p>Voulez-vous conservé le prix ?</p>
-                        <input type="radio" name="conserver" id="oui"><label for="oui">Oui</label>
-                        <input type="radio" name="conserver" id="non"><label for="non">Non</label>
-                    </div>
-                    <div class="form-control">
-                        <label for="pu">Prix Unitaire</label>
-                        <input type="number" id="pu" name="pu" placeholder="prix">
-                    </div>
-                    <div class="form-control">
-                        <label for="qte">Quantité</label>
-                        <input type="number" id="gte" name="qte" placeholder="Quantité">
-                    </div>
-                    <button type="submit">Valider</button><button type="reset">Anuler</button>
-                </form>
-            </div>
+        <div class="page-body">
+            <aside>
+                <div class="sidebar-title">Navigation</div>
+                <ul>
+                    <li><a href="#overview">Vue globale</a></li>
+                    <li><a href="#produits">Produits</a></li>
+                    <li><a href="#ajouter">Ajouter</a></li>
+                    <li><a href="#gerer">Gérer</a></li>
+                    <li><a href="#commandes">Déconnexion</a></li>
+                </ul>
+            </aside>
 
-        </main>
+            <main class="page-main">
+                <section id="overview" class="dashboard-overview">
+                    <div class="overview-header">
+                        <div>
+                            <p class="eyebrow">Tableau de bord</p>
+                            <h1>Vue globale</h1>
+                        </div>
+                        <div class="overview-actions">
+                            <button class="primary-action">Nouveau produit</button>
+                        </div>
+                    </div>
 
-        <main class="ajouter">  
-            <div class="form">
-                
-                <form action="">
-                    <h1>Ajouter un nouveau produit</h1>
-                    <div class="form-control">
-                        <label for="produit">nom du Produit</label>
-                        <input type="text" name="produit" id="produit">
+                    <div class="overview-grid">
+                        <article class="status-card">
+                            <h2>Commandes en attente</h2>
+                            <p>5</p>
+                        </article>
+                        <article class="status-card">
+                            <h2>Alerte de stock</h2>
+                            <p>3</p>
+                        </article>
+                        <article class="status-card">
+                            <h2>Commandes validées</h2>
+                            <p>12</p>
+                        </article>
+                        <article class="status-card">
+                            <h2>Ventes du mois</h2>
+                            <p>8</p>
+                        </article>
                     </div>
-                    <div class="form-control">
-                        <label for="pu">Prix Unitaire</label>
-                        <input type="number" id="pu" name="pu" placeholder="prix">
-                    </div>
-                    <div class="form-control">
-                        <label for="qte">Quantité</label>
-                        <input type="number" id="gte" name="qte" placeholder="Quantité">
-                    </div>
-                    <button type="submit">Valider</button><button type="reset">Anuler</button>
-                </form>
-            </div>
-        </main>
+                </section>
 
-        <main class="gerer">
-            <button type="button">Commandes</button>
-        </main>
-        <div class="cmd_derniere">
-            <h1>Les 5 dernières commandes</h1>
+                <section id="produits" class="dashboard-products">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">Produits</p>
+                            <h2>Liste des produits</h2>
+                        </div>
+                        <div class="panel-buttons">
+                            <button class="secondary-action">Liste des produits</button>
+                            <button class="secondary-action">Approvisionnement</button>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Type</th>
+                                    <th>PU</th>
+                                    <th>Qté</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Biscuit</td>
+                                    <td>Aliment</td>
+                                    <td>100</td>
+                                    <td>15</td>
+                                    <td class="actions-cell">
+                                        <button type="button" class="modifier">Modifier</button>
+                                        <button type="button" class="supprimer">Supprimer</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="ajouter" class="dashboard-forms">
+                    <div class="form-panel">
+                        <h2>Valider l'approvisionnement</h2>
+                        <form action="">
+                            <div class="form-control">
+                                <label for="produit">Produit</label>
+                                <select name="produit" id="produit">
+                                    <option value="">Choisissez un produit</option>
+                                </select>
+                            </div>
+                            <div class="form-control radio-group">
+                                <p>Voulez-vous conserver le prix ?</p>
+                                <label><input type="radio" name="conserver" value="oui"> Oui</label>
+                                <label><input type="radio" name="conserver" value="non"> Non</label>
+                            </div>
+                            <div class="form-control">
+                                <label for="pu">Prix unitaire</label>
+                                <input type="number" id="pu" name="pu" placeholder="Prix">
+                            </div>
+                            <div class="form-control">
+                                <label for="qte">Quantité</label>
+                                <input type="number" id="qte" name="qte" placeholder="Quantité">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Valider</button>
+                                <button type="reset" class="cancel">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="form-panel">
+                        <h2>Ajouter un nouveau produit</h2>
+                        <form action="">
+                            <div class="form-control">
+                                <label for="nouveau-produit">Nom du produit</label>
+                                <input type="text" name="produit" id="nouveau-produit">
+                            </div>
+                            <div class="form-control">
+                                <label for="prix-produit">Prix unitaire</label>
+                                <input type="number" id="prix-produit" name="pu" placeholder="Prix">
+                            </div>
+                            <div class="form-control">
+                                <label for="qte-produit">Quantité</label>
+                                <input type="number" id="qte-produit" name="qte" placeholder="Quantité">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Valider</button>
+                                <button type="reset" class="cancel">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="gerer" class="dashboard-latest">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">Commandes</p>
+                            <h2>Dernières commandes</h2>
+                        </div>
+                    </div>
+                    <div class="panel-card">
+                        <p>Les 5 dernières commandes apparaîtront ici.</p>
+                    </div>
+                </section>
+            </main>
         </div>
     </div>
 </body>

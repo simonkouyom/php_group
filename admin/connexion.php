@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin authentification</title>
+    <link rel="stylesheet" href="../css/admin-connexion.css">
 </head>
 
-<body>
+<body class="admin-login">
     <div class="container">
         <form action="">
             <div class="form-control">
